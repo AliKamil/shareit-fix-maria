@@ -20,13 +20,8 @@ import java.util.Map;
 @Service
 public class StatClient extends BaseClient {
 
-    private static final String SERVER_URL = "http://localhost:9090";
-
-    //http://stats-server:9090
-//    ${stats-server.url}
-
     @Autowired
-    public StatClient(@Value("http://localhost:9090") String serverUrl, RestTemplateBuilder builder) {
+    public StatClient(@Value("${practikum.explore.stat.service.url}") String serverUrl, RestTemplateBuilder builder) {
         super(
                 builder
                         .uriTemplateHandler(new DefaultUriBuilderFactory(serverUrl))

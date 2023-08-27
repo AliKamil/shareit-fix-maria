@@ -503,12 +503,12 @@ public class EventServiceImpl implements EventService {
         PageRequest pageRequest = PageRequest.of(from > 0 ? from / size : 0, size);
         List<Event> events = new ArrayList<>();
 
-        if (rangeStart == null) {
+        if (rangeStart == null && rangeEnd == null) {
+            rangeStart = LocalDateTime.now();
+        } else if (rangeStart == null) {
             rangeStart = LocalDateTime.now().minusYears(100);
         }
-        if (rangeEnd == null) {
-            rangeEnd = LocalDateTime.now();
-        }
+
         if (rangeStart.isAfter(rangeEnd)) {
             throw new ValidateException("Invalid request. The end date of the event is set later than the start date");
         }
